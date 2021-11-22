@@ -35,7 +35,7 @@ def connect_to_endpoint(url, params):
 def extract_to_tsv(json_file):
     with open('data.tsv', 'w', encoding='utf-8') as out_file:
         tsv_writer = csv.writer(out_file, delimiter='\t')
-        tsv_writer.writerow(['Annotation', 'Sentiment' 'Day', 'Text'])
+        tsv_writer.writerow(['Annotation', 'Sentiment', 'Day', 'Text'])
 
         with open(json_file, 'r') as f:
             data = json.load(f)
