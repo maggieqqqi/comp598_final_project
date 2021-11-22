@@ -14,8 +14,13 @@ search_url = 'https://api.twitter.com/2/tweets/search/recent'
 # query_params = {'query': '(from:twitterdev -is:retweet) OR #twitterdev','tweet.fields': 'author_id'}
 
 query_params = {'query': '(COVID OR vaccination OR pfizer OR moderna OR astrazeneca) (lang:en) (-is:retweet)',
-                'max_results': 14, 'start_time': '2021-11-{day}T{start_hour}:00:00Z',
-                'end_time': '2021-11-{day}T{end_hour}:59:59Z'}
+                'max_results': 14, 'start_time': '',
+                'end_time': ''}
+
+
+query_params_test = {'query': '(COVID OR vaccination OR pfizer OR moderna OR astrazeneca) (lang:en) (-is:retweet)',
+                'max_results': 10, 'start_time': '2021-11-18T01:00:00Z',
+                'end_time': '2021-11-18T02:00:00Z'}
 
 
 def bearer_oauth(r):
@@ -48,13 +53,15 @@ def extract_to_tsv(json_file):
 def get_from_last_three_days(params):
     json_response = {'18': [], '19': [], '20': []}
     day = 18
+    date_start = '2021-11-{day}T{hour}:00:00Z'
+    date_end = '2021-11-{day}T{hour}:59:59Z'
 
     # loop through every hour of the last 3 days
     while day < 21:
         hour = 0
-        while hour < 24:
-            params['start_time'] = params['start_time'].format(day=str(day), start_hour=str(hour).zfill(2))
-            params['end_time'] = params['end_time'].format(day=str(day), end_hour=str(hour+1).zfill(2))
+        while hour < 23:
+            params['start_time'] = date_start.format(day=str(day), hour=str(hour).zfill(2))
+            params['end_time'] = date_end.format(day=str(day), hour=str(hour).zfill(2))
 
             json_response[str(day)].append(connect_to_endpoint(search_url, params))
             hour += 1
@@ -66,7 +73,7 @@ def get_from_last_three_days(params):
 def main():
     json_response = get_from_last_three_days(query_params)
 
-    with open('data.json','w') as f:
+    with open('data_test.json','w') as f:
        json.dump(json_response,f,indent=4)
 
     extract_to_tsv('data.json')
