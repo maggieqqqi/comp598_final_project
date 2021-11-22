@@ -73,7 +73,7 @@ def get_from_last_three_days(params):
 def main():
     json_response = get_from_last_three_days(query_params)
 
-    with open('data_test.json','w') as f:
+    with open('data.json','w') as f:
        json.dump(json_response,f,indent=4)
 
     extract_to_tsv('data.json')
