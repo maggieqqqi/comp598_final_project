@@ -14,7 +14,7 @@ search_url = 'https://api.twitter.com/2/tweets/search/recent'
 # query_params = {'query': '(from:twitterdev -is:retweet) OR #twitterdev','tweet.fields': 'author_id'}
 
 query_params = {'query': '(COVID OR vaccination OR pfizer OR moderna OR astrazeneca) (lang:en) (-is:retweet)',
-                'max_results': 100, 'start_time': '2021-11-{day}T{start_hour}:00:00Z',
+                'max_results': 14, 'start_time': '2021-11-{day}T{start_hour}:00:00Z',
                 'end_time': '2021-11-{day}T{end_hour}:59:59Z'}
 
 
@@ -36,6 +36,7 @@ def extract_to_tsv(json_file):
     with open('data.tsv', 'w', encoding='utf-8') as out_file:
         tsv_writer = csv.writer(out_file, delimiter='\t')
         tsv_writer.writerow(['Annotation', 'Day', 'Text'])
+
         with open(json_file, 'r') as f:
             data = json.load(f)
             for day, entries_per_day in data.items():
