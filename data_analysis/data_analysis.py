@@ -58,12 +58,14 @@ def compute_word_counts(data):
     stopwords_file.close()
 
     data_df = preprocess_data(data)
+    count_sentiment(data_df.copy())
+
     output = categories_json
 
     for i in range(len(data_df['Annotation'])):
         annotation = str(data_df.iloc[i,0])
 
-        for word in data_df.iloc[i,1].split():
+        for word in data_df.iloc[i,2].split():
             if word not in stopwords and word.isalpha():
                 if word not in output[annotation]:
                     output[annotation][word] = 1
@@ -81,7 +83,7 @@ def compute_word_counts(data):
     return output
 
 def preprocess_data(data):
-    df = data[['Annotation','Text']]
+    df = data[['Annotation','Sentiment','Text']]
     
     # remove punctuation
     df['Text'] = df['Text'].str.replace('https(.*)',' ',regex=True).replace('#', ' ', regex=True).replace('[()\[\],-.?!;:#&]', ' ', regex=True).replace('@\w+','',regex=True)
@@ -91,9 +93,42 @@ def preprocess_data(data):
     for i in range(len(df['Text'])):
       df.iloc[i, 0] = df.iloc[i, 0].lower()
       df.iloc[i, 1] = df.iloc[i, 1].lower()
+      df.iloc[i, 2] = df.iloc[i, 2].lower()
 
     df.to_csv('pre_processed_data.csv',sep='\t')
     return df
+
+def count_sentiment(data_df):
+    output = categories_json
+
+    for i in range(len(data_df['Sentiment'])):
+        annotation = str(data_df.iloc[i,0])
+
+        for sentiment in data_df.iloc[i,1].split():
+            if sentiment != 'a' and sentiment != 'p' and sentiment != 'n':
+                continue
+            if sentiment not in output[annotation]:
+                output[annotation][sentiment] = 1
+            else:
+                output[annotation][sentiment] += 1
+
+    with open('./sentiment_count.json', 'w') as file:
+        json.dump(output, file, indent=4, sort_keys=True)
+
+    output_percentage = categories_json
+
+    for annotation in output:
+        total = 0
+        for annot,count in output[annotation].items():
+            total += count
+        for sentiment,count in output[annotation].items():
+            percentage = '{:.2f}'.format((output[annotation][sentiment] / total) * 100)
+            output_percentage[annotation][sentiment] = percentage
+  
+    with open('./sentiment_percentage.json', 'w') as file:
+        json.dump(output, file, indent=4, sort_keys=True)
+        
+    return output
 
 def main():
     tsv_file = open('data.tsv')
