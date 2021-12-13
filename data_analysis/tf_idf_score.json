@@ -1,0 +1,86 @@
+{
+    "d": {
+        "believe": 3.8918,
+        "canada": 5.8377,
+        "cohort": 3.8918,
+        "deaths": 10.7671,
+        "died": 15.0332,
+        "kill": 5.8377,
+        "october": 5.8377,
+        "shock": 3.8918,
+        "toll": 7.7836,
+        "unnecessary": 3.8918
+    },
+    "h": {
+        "doctors": 3.8918,
+        "icu": 2.5419,
+        "load": 3.8918,
+        "market": 3.8918,
+        "normal": 3.8918,
+        "nurse": 3.8918,
+        "nursing": 3.8918,
+        "patient": 3.8918,
+        "quarantine": 5.8377,
+        "scientist": 3.8918
+    },
+    "i": {
+        "god": 6.2638,
+        "lowest": 7.7836,
+        "pregnant": 9.7296,
+        "reality": 7.7836,
+        "reports": 7.7836,
+        "risk": 9.3203,
+        "taste": 7.7836,
+        "winter": 7.5166,
+        "women": 7.5166,
+        "worst": 7.7836
+    },
+    "m": {
+        "announces": 7.7836,
+        "australia": 7.7836,
+        "austria": 14.4041,
+        "government": 14.4041,
+        "imposes": 9.7296,
+        "lockdown": 28.8135,
+        "measures": 13.6214,
+        "police": 11.2749,
+        "protest": 9.7296,
+        "restrictions": 21.405
+    },
+    "o": {
+        "corona": 13.6214,
+        "exactly": 9.7296,
+        "funds": 11.6755,
+        "guy": 9.7296,
+        "highly": 9.7296,
+        "left": 9.7296,
+        "news": 11.2749,
+        "please": 11.2749,
+        "post": 11.2749,
+        "relief": 11.6755
+    },
+    "t": {
+        "centres": 5.8377,
+        "dubai": 3.8918,
+        "melrose": 3.8918,
+        "pcr": 5.8377,
+        "pill": 3.8918,
+        "self": 3.8918,
+        "test": 13.5568,
+        "testing": 7.6257,
+        "tests": 5.8377,
+        "uae": 3.8918
+    },
+    "v": {
+        "adults": 15.5673,
+        "anti": 17.5387,
+        "booster": 68.1069,
+        "fda": 15.0332,
+        "moderna": 22.5497,
+        "pfizer": 63.8909,
+        "shot": 14.55,
+        "vaccination": 19.1789,
+        "vaccines": 27.9608,
+        "vax": 17.5387
+    }
+}
